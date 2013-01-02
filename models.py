@@ -5,6 +5,11 @@ from smartypants import smartyPants
 from taggit.managers import TaggableManager
 
 
+class ArticleManager(models.Manager):
+    def published(self):
+        return self.filter(status=Article.PUBLISHED_STATUS)
+
+
 class Article(models.Model):
     """
     An Article is a writing entry that is translated into markdown.
@@ -25,6 +30,8 @@ class Article(models.Model):
     text_html = models.TextField(null=True, blank=True)
 
     tags = TaggableManager(blank=True)
+
+    objects = ArticleManager()
 
     def save(self, *args, **kwargs):
         if self.status == Article.PUBLISHED_STATUS and not self.timestamp_published:
