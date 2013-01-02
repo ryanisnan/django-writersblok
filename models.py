@@ -1,5 +1,7 @@
-from django.db import models
 from datetime import datetime
+from django.db import models
+from markdown import markdown
+from smartypants import smartyPants
 from taggit.managers import TaggableManager
 
 
@@ -28,6 +30,7 @@ class Article(models.Model):
         if self.status == Article.PUBLISHED_STATUS and not self.timestamp_published:
             self.timestamp_published = datetime.now()
 
+        self.text_html = markdown(smartyPants(self.text_raw), output_format='HTML5')
         super(Article, self).save(*args, **kwargs)
 
     def __unicode__(self):
