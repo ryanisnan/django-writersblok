@@ -24,7 +24,7 @@ class Article(models.Model):
     text_raw = models.TextField(null=True, blank=True)
     text_html = models.TextField(null=True, blank=True)
 
-    tags = TaggableManager()
+    tags = TaggableManager(blank=True)
 
     def save(self, *args, **kwargs):
         if self.status == Article.PUBLISHED_STATUS and not self.timestamp_published:

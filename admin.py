@@ -11,7 +11,6 @@ class ArticleAdmin(admin.ModelAdmin):
             'fields': ('title', 'slug', 'status', 'timestamp_published')
         }),
         ('Content', {
-            'classes': ('collapse',),
             'fields': ('text_raw', 'text_html', 'tags')
         }),
     )
