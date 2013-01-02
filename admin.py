@@ -5,7 +5,6 @@ from writersblok.models import Article
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ('title', 'status', 'timestamp_published')
     list_filter = ('status',)
-    readonly_fields = ('timestamp_published',)
     fieldsets = (
         (None, {
             'fields': ('title', 'slug', 'status', 'timestamp_published')

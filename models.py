@@ -33,6 +33,10 @@ class Article(models.Model):
 
     objects = ArticleManager()
 
+    class Meta:
+        ordering = ['-timestamp_published', ]
+        get_latest_by = 'timestamp_published'
+
     def save(self, *args, **kwargs):
         if self.status == Article.PUBLISHED_STATUS and not self.timestamp_published:
             self.timestamp_published = datetime.now()
